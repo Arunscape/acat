@@ -1,6 +1,6 @@
 use std::io;
-use std::io::Read;
 use rand::Rng;
+use std::io::prelude::*;
 
 fn paint(r:u8, g:u8, b:u8) {
     let esc = char::from(0x1b);
@@ -8,14 +8,16 @@ fn paint(r:u8, g:u8, b:u8) {
 }
 
 fn main() {
-    let mut buffer = String::new();
-    io::stdin().read_to_string(&mut buffer).unwrap();
-
     let mut rng = rand::thread_rng();
-    for c in buffer.chars() {
 
-        paint(rng.gen(), rng.gen(), rng.gen());
-        print!("{}" ,c);        
+        for line in io::stdin().lock().lines() {
+
+            for c in line.unwrap().chars() {
+
+            paint(rng.gen(), rng.gen(), rng.gen());
+            print!("{}" ,c);        
+        }
+            println!();
     }
 
     println!();
