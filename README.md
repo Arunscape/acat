@@ -18,4 +18,5 @@ cargo install --path .
 
 ```
 echo hello | acat
+acat file1.txt file2.txt
 ```
