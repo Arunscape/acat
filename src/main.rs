@@ -1,5 +1,6 @@
 use rand::Rng;
 use std::fs::File;
+use std::usize::MAX;
 use std::{self, env, io, io::prelude::*, io::BufReader};
 
 fn paint(r: u8, g: u8, b: u8) {
@@ -17,16 +18,19 @@ fn read_stdin() -> () {
     }
 }
 
-fn read_file(file: &String) -> () {
+fn read_file(files: &Vec<String>) -> () {
     let mut rng = rand::thread_rng();
-    let file = File::open(file);
 
-    for line in BufReader::new(file.unwrap()).lines() {
-        for c in line.unwrap().chars() {
-            paint(rng.gen(), rng.gen(), rng.gen());
-            print!("{}", c);
+    for file in files.iter().skip(1) {
+        let file = File::open(file);
+
+        for line in BufReader::new(file.unwrap()).lines() {
+            for c in line.unwrap().chars() {
+                paint(rng.gen(), rng.gen(), rng.gen());
+                print!("{}", c);
+            }
+            println!();
         }
-        println!();
     }
 }
 
@@ -43,7 +47,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     match args.len() {
         1 => read_stdin(),
-        2 => read_file(&args[1]),
+        (2..=MAX) => read_file(&args),
         _ => eprintln!("todo, print help"),
     }
 }
