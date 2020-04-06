@@ -8,7 +8,7 @@ echo hello | cargo run
 And if you want to install it for whatever reason:
 
 ```
-cargo install --path .
+cargo install acat
 ```
 
 ```
