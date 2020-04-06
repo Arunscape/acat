@@ -4,7 +4,7 @@ version = "0.1.1"
 authors = ["Arunscape <8227297+Arunscape@users.noreply.github.com>"]
 edition = "2018"
 license="GPL-3.0-or-later"
-description="Like lolcat, but more chaotic"
+description="Like lolcat, but more chaotic. Not feature-complete yet."
 maintenance="actively-developed"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
