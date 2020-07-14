@@ -1,6 +1,10 @@
 #![deny(clippy::all)]
 
-use getopts::Options;
+mod clap_app;
+use clap_app::clap_app;
+
+use std::path::Path;
+
 use rand::Rng;
 use std::fs::File;
 use std::usize::MAX;
@@ -21,7 +25,7 @@ fn read_stdin() -> () {
     }
 }
 
-fn read_file(files: &Vec<String>) -> () {
+fn read_file(files: &Vec<&str>) {
     let mut rng = rand::thread_rng();
 
     for file in files.iter().skip(1) {
@@ -38,7 +42,7 @@ fn read_file(files: &Vec<String>) -> () {
 }
 
 #[allow(dead_code)]
-fn read_file_plain(file: &String) -> () {
+fn read_file_plain(file: &String) {
     let file = File::open(file);
 
     for line in BufReader::new(file.unwrap()).lines() {
@@ -47,32 +51,12 @@ fn read_file_plain(file: &String) -> () {
 }
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
+    let matches = clap_app().get_matches();
 
-    let mut opts = Options::new();
-    opts.optflag("A", "show-all", "equivalent to -vET");
-    opts.optflag(
-        "b",
-        "number-nonblank",
-        "number nonempty output lines, overrides -n",
-    );
-    opts.optflag("e", "", "equivalent to -vE");
-    opts.optflag("E", "show-ends", "display $ at end of each line");
-    opts.optflag("n", "number", "number all output lines");
-    opts.optflag("s", "squeeze-blank", "suppress repeated empty output lines");
-    opts.optflag("t", "", "equivalent to -vT");
-    opts.optflag("T", "show-tabs", "display TAB characters as ^I");
-    opts.optflag("u", "", "(ignored)");
-    opts.optflag(
-        "v",
-        "show-nonprinting",
-        "use ^ and M- notation, except for LFD and TAB",
-    );
-    opts.optflag("", "version", "output version information and exit");
-
-    match args.len() {
-        1 => read_stdin(),
-        (2..=MAX) => read_file(&args),
-        _ => eprintln!("todo, print help"),
+    if matches.is_present("FILE") {
+        let files: Vec<&str> = matches.values_of("FILE").unwrap().collect();
+        read_file(&files);
+    } else {
+        read_stdin();
     }
 }
