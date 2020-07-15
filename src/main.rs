@@ -28,7 +28,7 @@ fn read_stdin() -> () {
 fn read_file(files: &Vec<&str>) {
     let mut rng = rand::thread_rng();
 
-    for file in files.iter().skip(1) {
+    for file in files.iter() {
         let file = File::open(file);
 
         for line in BufReader::new(file.unwrap()).lines() {
