@@ -95,6 +95,5 @@ pub fn clap_app() -> ClapApp<'static, 'static> {
                 .long("luminosity")
                 .takes_value(true)
                 .possible_values(&["bright", "light", "dark", "random"])
-                .default_value("random")
         )
 }
