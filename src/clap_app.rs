@@ -84,4 +84,17 @@ pub fn clap_app() -> ClapApp<'static, 'static> {
                 .help("use ^ and M- notation, except for LFD and TAB")
                 .display_order(9)
         )
+        .arg(
+            Arg::with_name("hue")
+                .long("hue")
+                .takes_value(true)
+                .possible_values(&["mono", "red", "orange", "yellow", "green", "blue", "purple", "pink"])
+        )
+        .arg(
+            Arg::with_name("luminosity")
+                .long("luminosity")
+                .takes_value(true)
+                .possible_values(&["bright", "light", "dark", "random"])
+                .default_value("random")
+        )
 }

@@ -3,19 +3,16 @@
 mod clap_app;
 use clap_app::clap_app;
 
-use std::path::Path;
-
 use rand::Rng;
 use std::fs::File;
-use std::usize::MAX;
-use std::{self, env, io, io::prelude::*, io::BufReader};
+use std::{self, io, io::prelude::*, io::BufReader};
 
 fn paint(r: u8, g: u8, b: u8) {
     let esc = char::from(0x1b);
     print!("{}[38;2;{};{};{}m", esc, r, g, b);
 }
 
-fn read_stdin() -> () {
+fn read_stdin() {
     let mut rng = rand::thread_rng();
     for line in io::stdin().lock().lines() {
         for c in line.unwrap().chars() {
@@ -42,7 +39,7 @@ fn read_file(files: &Vec<&str>) {
 }
 
 #[allow(dead_code)]
-fn read_file_plain(file: &String) {
+fn read_file_plain(file: &str) {
     let file = File::open(file);
 
     for line in BufReader::new(file.unwrap()).lines() {
