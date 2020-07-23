@@ -1,7 +1,4 @@
-use clap::{
-    crate_authors, crate_name, crate_version, App as ClapApp, AppSettings, Arg, ArgGroup,
-    SubCommand,
-};
+use clap::{crate_authors, crate_name, crate_version, App as ClapApp, Arg};
 use std::env;
 
 pub fn clap_app() -> ClapApp<'static, 'static> {

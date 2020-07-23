@@ -3,7 +3,6 @@
 mod clap_app;
 use clap_app::clap_app;
 
-use rand::Rng;
 use std::fs::File;
 use std::{self, io, io::prelude::*, io::BufReader};
 
