@@ -10,6 +10,6 @@ maintenance="actively-developed"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rand = "0.7.2"
-clap = "2.33.1"
-random_color = "0.4.4"
+rand = "0.7.3"
+clap = "2.33.3"
+random_color = "0.5.0"
